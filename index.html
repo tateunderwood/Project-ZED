@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TrueContract</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>TrueContract</h1>
+    <p class="purpose">
+      See how a quarterback's contract compares with what he did on the field.
+      Pick a quarterback, change his stats with the sliders, or compare him with
+      another quarterback.
+    </p>
+  </header>
+
+  <aside class="notice" aria-labelledby="notice-title">
+    <h2 id="notice-title">Early version</h2>
+    <p>
+      This is an unfinished class project, not a final rating. TrueValue is an
+      estimate built from one season of passing stats and a scale chosen for this
+      project. It is not financial or contract advice.
+      <a href="#about">How the numbers work</a>
+    </p>
+  </aside>
+
+  <noscript><p class="status">This app needs JavaScript turned on.</p></noscript>
+  <p id="status" class="status" role="alert" hidden></p>
+
+  <main class="layout">
+    <section class="panel" aria-labelledby="list-heading">
+      <h2 id="list-heading">Quarterbacks <span id="player-count" class="count"></span></h2>
+      <div class="list-tools">
+        <div class="control">
+          <label for="player-search">Search</label>
+          <input id="player-search" type="search" placeholder="Name or team" autocomplete="off">
+        </div>
+        <div class="control">
+          <label for="player-filter">Show</label>
+          <select id="player-filter">
+            <option value="all">All</option>
+            <option value="active">Active</option>
+            <option value="retired">Retired or not active</option>
+          </select>
+        </div>
+      </div>
+      <ul id="player-list" class="player-list"></ul>
+      <p id="list-empty" class="hint" hidden>No quarterbacks match.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="detail-heading">
+      <h2 id="detail-heading">Player</h2>
+
+      <div class="controls">
+        <div class="control">
+          <label for="compare-select">Compare with</label>
+          <select id="compare-select" disabled>
+            <option value="">No comparison</option>
+          </select>
+        </div>
+        <button type="button" id="reset-btn" disabled>Reset stats</button>
+        <button type="button" id="clear-btn" disabled>Clear</button>
+      </div>
+
+      <p id="hint" class="hint">Pick a quarterback from the list to get started.</p>
+      <div id="cards" class="cards"></div>
+      <div id="comparison" class="comparison" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <section class="h2h panel" aria-labelledby="h2h-heading">
+    <h2 id="h2h-heading">Head-to-head</h2>
+    <p class="hint">
+      Pick a quarterback on each side. Choose which stats to use: the season used
+      for scoring, any single season, or career totals. TrueValue is worked out
+      from whichever stats are shown. The better number in each row is marked with &#9650;.
+      Awards for the season show under each name, and &#9733; in the list marks seasons with an award.
+      MVP winners are listed first. Type in the search box to narrow the list; if only one quarterback
+      matches, he is picked for you, and Enter picks the first match.
+    </p>
+
+    <div class="h2h-pickers">
+      <div class="h2h-side">
+        <div class="control h2h-search">
+          <label for="h2h-search-0">Find a quarterback</label>
+          <input id="h2h-search-0" type="search" placeholder="Type a name or team" autocomplete="off" disabled>
+        </div>
+        <div class="control">
+          <label for="h2h-player-0">Left quarterback</label>
+          <select id="h2h-player-0" disabled></select>
+        </div>
+        <div class="control">
+          <label for="h2h-season-0">Stats from</label>
+          <select id="h2h-season-0" disabled></select>
+        </div>
+      </div>
+      <div class="h2h-side">
+        <div class="control h2h-search">
+          <label for="h2h-search-1">Find a quarterback</label>
+          <input id="h2h-search-1" type="search" placeholder="Type a name or team" autocomplete="off" disabled>
+        </div>
+        <div class="control">
+          <label for="h2h-player-1">Right quarterback</label>
+          <select id="h2h-player-1" disabled></select>
+        </div>
+        <div class="control">
+          <label for="h2h-season-1">Stats from</label>
+          <select id="h2h-season-1" disabled></select>
+        </div>
+      </div>
+    </div>
+
+    <div id="h2h-table" class="h2h-table"></div>
+  </section>
+
+  <section id="about" class="about" aria-labelledby="about-heading">
+    <h2 id="about-heading">About these numbers</h2>
+    <p id="formula"></p>
+    <p id="scale-note"></p>
+    <ul>
+      <li>Passing stats only. Rushing, scrambling and everything else a quarterback does are not counted.</li>
+      <li id="season-note">One season of stats: 2025 for most quarterbacks.</li>
+      <li>Each season is compared with the contract he was on that season, shown as its average per year. A deal signed before a season starts counts for that season. Fifth-year option years use the option amount.</li>
+      <li>Salary caps by season come from the NFL. 2010 had no salary cap, so the site uses $123 million (the 2009 cap) for that season.</li>
+      <li>Contracts, cap hits and cash paid come from OverTheCap.com and may contain mistakes. OverTheCap has little contract history for quarterbacks who retired before about 2012, so their contracts often show as not available. Guaranteed money and contract length are shown but don't change TrueValue.</li>
+      <li>Quarterbacks on rookie contracts will usually look like bargains. That is part of what this app shows.</li>
+      <li>The sliders change one stat at a time and keep everything else the same. They are for exploring, not predicting.</li>
+      <li>The site includes every quarterback who was his team's main starter in at least one season from 2000 on. Only seasons from 2000 on are included, so careers that started earlier (like Brett Favre's) are shown from 2000.</li>
+      <li>Stats come from Pro Football Reference for the original 22 quarterbacks and from nflverse for the rest (the two sources matched almost exactly). For nflverse quarterbacks, starts are estimated as the games where he threw the most passes for his team, so they can be off by one. This project is not connected to the NFL or any team.</li>
+      <li>Awards: MVP, Offensive Player of the Year, Offensive Rookie of the Year, All-Pro, Pro Bowl and Super Bowl honors from Wikipedia (AP awards); 2nd and 3rd in MVP voting from the Associated Press results. Super Bowl champion counts only the quarterback who started the game.</li>
+      <li>Headshots: ESPN, and NFL.com for some retired quarterbacks.</li>
+    </ul>
+  </section>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
