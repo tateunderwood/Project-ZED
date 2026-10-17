@@ -6,7 +6,7 @@ was actually on that season. You can change his stats with sliders, or compare a
 
 This is a class project (Project Zed). TrueValue is an estimate made for this project, not financial or contract advice.
 
-**Live site:** https://USERNAME.github.io/zed/ <!-- replace USERNAME after publishing -->
+**Live site:** https://tateunderwood.github.io/Project-ZED/ 
 
 ## Features
 
